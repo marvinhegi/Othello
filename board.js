@@ -230,4 +230,27 @@ export class Board {
     }
     throw RangeError(`illegal player ${player}`);
   }
+
+
+
+
+
+  isValidMove(player, row, col) {
+    if (player !== 1 && player !== 2) {
+      throw new RangeError(`illegal player ${player}`);
+    }
+    if (row < 0 || row >= 8 || col < 0 || col >= 8) {
+      return false;
+    }
+    const empty = 0;
+    if (this.fields[row][col] !== empty) {
+      return false;
+    }
+    const moves = this.validMoves(player);
+    return [...moves].some(([r, c]) => r === row && c === col);
+  }
+
+
+
+
 }
